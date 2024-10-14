@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<form action="${pageContext.request.contextPath}/admin/video/update"" method ="POST">
+    <input type="text" id="videoId" name="videoId" value="${vd.videoId}" hidden="hidden"><br>
+    <label for="fname">vdgory name:</label><br>
+    <input type="text" id="vdgoryname" name="vdgoryname" value="${vd.vdgoryname}"><br>
+    
+    <label for="lname">Images:</label><br>
+    <c:choose>
+        <c:when test="${not empty vd.images}">
+            <c:url value="/image?fname=${vd.images}" var="imgUrl"></c:url>
+            <img height="150" width="200" src="${imgUrl}" alt="vdgory Image" />
+        </c:when>
+        <c:otherwise>
+            <p>No image available</p>
+        </c:otherwise>
+    </c:choose>
+    
+    <input type="file" id="images" name="images"><br>
+    
+    <label for="status">Active:</label><br>
+    <input type="text" id="status" name="status" value="${vd.active}"><br>
+    
+    <br>
+    <input type="submit" value="Submit">
+</form>

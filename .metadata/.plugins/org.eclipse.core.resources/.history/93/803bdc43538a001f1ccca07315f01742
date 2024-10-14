@@ -1,0 +1,87 @@
+package vn.iostar.controller;
+
+import java.io.IOException;
+import java.util.List;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import vn.iostar.entity.Category;
+import vn.iostar.service.ICategoryService;
+import vn.iostar.service.IVideoService;
+import vn.iostar.service.impl.CatergoryServiceImpl;
+import vn.iostar.service.impl.VideoServiceImpl;
+@MultipartConfig()
+
+
+@WebServlet(urlPatterns = { "/admin/videos", "/admin/video/add", "/admin/video/insert",
+
+
+ "/admin/video/edit", "/admin/video/update", "/admin/video/delete" })
+public class AdminControllerVideo extends HttpServlet   {
+
+	/**
+	 * 
+	 */
+	public IVideoService vdService = new VideoServiceImpl();
+
+	private static final long serialVersionUID = 1L;
+	@Override
+	
+	 protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+	 String url = req.getRequestURI();
+
+	 if (url.contains("/admin/categories")) {
+
+	 List<Category> list = cateService.findAll();
+
+	 req.setAttribute("listcate", list);
+
+	 req.getRequestDispatcher("/views/admin/category-list.jsp").forward(req, resp);
+
+	 } else if (url.contains("/admin/category/add")) {
+
+	 req.getRequestDispatcher("/views/admin/category-add.jsp").forward(req, resp);
+
+	 } else if (url.contains("/admin/category/edit")) {
+
+	 int id = Integer.parseInt(req.getParameter("id"));
+
+	 Category category = null;
+	try {
+		category = cateService.findById(id);
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+
+	 req.setAttribute("cate", category);
+
+	 req.getRequestDispatcher("/views/admin/category-edit.jsp").forward(req, resp);
+
+	 } else {
+
+	 int id = Integer.parseInt(req.getParameter("id"));
+
+	 try {
+
+	 cateService.delete(id);
+
+	 } catch (Exception e) {
+
+	 // TODO Auto-generated catch block
+	 e.printStackTrace();
+
+	 }
+
+	 // chuyển trang
+
+	 resp.sendRedirect(req.getContextPath() + "/admin/categories");
+
+	 }
+
+	 }
+}

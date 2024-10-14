@@ -1,0 +1,11 @@
+1728454448913	Rename type 'ICategory'
+1728454688807	Pull up members to 'ICategoryDao'
+1728456351768	Pull up members to 'ICategoryDao'
+1728456569341	Pull up members to 'ICategoryDao'
+1728456662779	Pull up members to 'ICategoryDao'
+1728458944741	Move compilation unit
+1728461073894	Rename type 'ADminController'
+1728462445021	Rename type 'CatergoryService'
+1728463266603	Move compilation unit
+1728463270366	Delete element
+1728463326525	Rename type 'Constain'

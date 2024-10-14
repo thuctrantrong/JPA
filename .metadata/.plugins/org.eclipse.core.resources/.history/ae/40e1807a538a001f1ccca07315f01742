@@ -1,0 +1,22 @@
+package vn.iostar.controller;
+
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import vn.iostar.service.IVideoService;
+import vn.iostar.service.impl.VideoServiceImpl;
+
+@MultipartConfig()
+
+
+@WebServlet(urlPatterns = { "/admin/videos","/admin/video/insert"})
+public class AdminControllerVideo extends HttpServlet   {
+
+	/**
+	 * 
+	 */
+	public IVideoService vdService = new VideoServiceImpl();
+
+	private static final long serialVersionUID = 1L;
+	
+}

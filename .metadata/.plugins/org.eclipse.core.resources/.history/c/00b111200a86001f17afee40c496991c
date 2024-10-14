@@ -1,0 +1,11 @@
+package vn.iostar.dao;
+
+import java.util.Locale.Category;
+
+public interface ICategoryDao {
+
+	void update(Category category);
+
+	void insert(Category category);
+
+}

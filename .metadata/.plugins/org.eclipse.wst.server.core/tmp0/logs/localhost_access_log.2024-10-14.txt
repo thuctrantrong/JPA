@@ -1,0 +1,17 @@
+127.0.0.1 - - [14/Oct/2024:23:02:38 +0700] "GET / HTTP/1.1" 404 752
+0:0:0:0:0:0:0:1 - - [14/Oct/2024:23:02:39 +0700] "GET /JPA/views/admin/home.jsp HTTP/1.1" 200 272
+0:0:0:0:0:0:0:1 - - [14/Oct/2024:23:02:39 +0700] "GET /favicon.ico HTTP/1.1" 404 763
+0:0:0:0:0:0:0:1 - - [14/Oct/2024:23:02:40 +0700] "POST /LaptrinhData/logout HTTP/1.1" 404 775
+0:0:0:0:0:0:0:1 - - [14/Oct/2024:23:03:37 +0700] "GET /JPA/views/admin/category-list.jsp HTTP/1.1" 200 267
+0:0:0:0:0:0:0:1 - - [14/Oct/2024:23:05:30 +0700] "GET /JPA/views/admin/category-list.jsp HTTP/1.1" 200 267
+0:0:0:0:0:0:0:1 - - [14/Oct/2024:23:05:32 +0700] "GET /JPA/admin/category/add HTTP/1.1" 200 417
+0:0:0:0:0:0:0:1 - - [14/Oct/2024:23:05:34 +0700] "GET /JPA/views/admin/category-list.jsp HTTP/1.1" 200 267
+0:0:0:0:0:0:0:1 - - [14/Oct/2024:23:05:35 +0700] "GET /JPA/views/admin/category-list.jsp HTTP/1.1" 200 267
+0:0:0:0:0:0:0:1 - - [14/Oct/2024:23:05:35 +0700] "GET /JPA/views/admin/category-list.jsp HTTP/1.1" 200 267
+0:0:0:0:0:0:0:1 - - [14/Oct/2024:23:05:35 +0700] "GET /JPA/views/admin/category-list.jsp HTTP/1.1" 200 267
+0:0:0:0:0:0:0:1 - - [14/Oct/2024:23:05:35 +0700] "GET /JPA/views/admin/category-list.jsp HTTP/1.1" 200 267
+0:0:0:0:0:0:0:1 - - [14/Oct/2024:23:05:35 +0700] "GET /JPA/views/admin/category-list.jsp HTTP/1.1" 200 267
+0:0:0:0:0:0:0:1 - - [14/Oct/2024:23:07:48 +0700] "GET /JPA/admin/categories HTTP/1.1" 500 3416
+0:0:0:0:0:0:0:1 - - [14/Oct/2024:23:09:07 +0700] "GET /JPA/admin/categories HTTP/1.1" 500 3770
+0:0:0:0:0:0:0:1 - - [14/Oct/2024:23:10:41 +0700] "GET /JPA/admin/categories HTTP/1.1" 200 659
+0:0:0:0:0:0:0:1 - - [14/Oct/2024:23:10:41 +0700] "GET /JPA/image?fname= HTTP/1.1" 404 765

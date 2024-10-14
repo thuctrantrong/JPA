@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="lombok.Data"/>
+    <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
+    <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
+    <fullyQualifiedTypeName name="java.lang.Deprecated"/>
+    <fullyQualifiedTypeName name="vn.iostar.dao.ICategory"/>
+    <fullyQualifiedTypeName name="java.util.Locale.Category"/>
+    <fullyQualifiedTypeName name="vn.iostar.dao.ICategoryDao"/>
+    <fullyQualifiedTypeName name="vn.iostar.dao.CategoryDao"/>
+    <fullyQualifiedTypeName name="jakarta.servlet.http.HttpServletRequest"/>
+    <fullyQualifiedTypeName name="jakarta.servlet.http.HttpServletResponse"/>
+    <fullyQualifiedTypeName name="vn.iostar.service.ICategoryService"/>
+    <fullyQualifiedTypeName name="vn.iostar.dao.impl.VideoDao"/>
+    <fullyQualifiedTypeName name="vn.iostar.service.IVideoService"/>
+    <fullyQualifiedTypeName name="vn.iostar.service.impl.VideoServiceImpl"/>
+</qualifiedTypeNameHistroy>

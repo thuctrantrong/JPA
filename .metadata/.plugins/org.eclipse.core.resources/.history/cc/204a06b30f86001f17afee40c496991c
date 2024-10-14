@@ -1,0 +1,13 @@
+package vn.iostar.service;
+
+import java.util.List;
+import java.util.Locale.Category;
+
+import vn.iostar.dao.CategoryDao;
+import vn.iostar.dao.ICategoryDao;
+
+public class CatergoryService implements ICategoryService{
+
+	public ICategoryDao cateDao = new CategoryDao();
+
+}

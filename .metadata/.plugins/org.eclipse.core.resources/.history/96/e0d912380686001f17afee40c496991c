@@ -1,0 +1,58 @@
+package vn.iostar.dao;
+
+import java.util.Locale.Category;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
+import vn.iostar.config.JPAConfig;
+
+public class CategoryDao implements ICategoryDao {
+	public void insert(Category category) {
+		EntityManager enma = JPAConfig.getEntityManager();
+
+		EntityTransaction trans = enma.getTransaction();
+		try {
+
+			trans.begin();
+			enma.persist(category);
+			trans.commit();
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+			trans.rollback();
+
+			throw e;
+
+		} finally {
+
+			enma.close();
+
+		}
+	}
+	public void update(Category category) {
+		EntityManager enma = JPAConfig.getEntityManager();
+
+		EntityTransaction trans = enma.getTransaction();
+		try {
+
+			trans.begin();
+			enma.persist(category);
+			trans.commit();
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+			trans.rollback();
+
+			throw e;
+
+		} finally {
+
+			enma.close();
+
+		}
+	}
+}

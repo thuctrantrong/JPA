@@ -1,0 +1,53 @@
+package vn.iostar.dao.impl;
+
+import java.util.List;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
+import vn.iostar.config.JPAConfig;
+import vn.iostar.dao.ICategoryDao;
+import vn.iostar.dao.IVideoDao;
+import vn.iostar.entity.Category;
+import vn.iostar.entity.Video;
+
+public class VideoDao implements IVideoDao  {
+
+	@Override
+	public void insert(Video video) {
+		EntityManager enma = JPAConfig.getEntityManager();
+
+		EntityTransaction trans = enma.getTransaction();
+		try {
+
+			trans.begin();
+			enma.persist(category);
+			trans.commit();
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+			trans.rollback();
+
+			throw e;
+
+		} finally {
+
+			enma.close();
+
+		}
+	}
+
+	@Override
+	public List<Video> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Category findByVideoname(String name) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

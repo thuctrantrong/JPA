@@ -1,0 +1,39 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+
+<a href="${pageContext.request.contextPath}/admin/category/add">Add
+	Category</a>
+<table border="1" width="100%">
+	<tr>
+		<th>STT</th>
+		<th>Images</th>
+		<th>videoId</th>
+		<th>description</th>
+		<th>views</th>
+		<th>active</th>
+		<th>category</th>
+		<th>Action</th>
+	</tr>
+	<c:forEach items="${listcate}" var="vd" varStatus="STT">
+		<tr class="odd gradeX">
+			<td>${STT.index + 1}</td>
+
+			<td><c:if test="${vd.images.substring(0, 5) != 'https'}">
+					<c:url value="/image?fname=${vd.images}" var="imgUrl"></c:url>
+					<img height="150" width="200" src="${imgUrl}" />
+				</c:if> <c:if test="${vd.images.substring(0, 5) == 'https'}">
+					<img height="150" width="200" src="${vd.images}" />
+				</c:if></td>
+
+			<td>${vd.categoryId}</td>
+			<td>${vd.categoryname}</td>
+			<td>${vd.categorycode}</td>
+			<td><c:if test="${vd.status == true}">
+					<span>Hoạt động</span>
+				</c:if> <c:if test="${vd.status == false }">
+					<span>Khóa</span>
+				</c:if></td>
+		</tr>
+	</c:forEach>
+</table>
