@@ -5,7 +5,7 @@ import java.util.List;
 import vn.iostar.entity.Category;
 
 public interface ICategoryService {
-	
+
 	 void insert(Category category);
 
 	 int count();

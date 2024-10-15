@@ -11,7 +11,7 @@ public class VideoServiceImpl implements IVideoService {
 
 	public IVideoDao vdDao = new VideoDao();
 
-	
+
 	@Override
 	public void insert(Video video){
 		Video vd = null;

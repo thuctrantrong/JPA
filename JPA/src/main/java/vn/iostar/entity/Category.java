@@ -1,17 +1,23 @@
 package vn.iostar.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 
 @AllArgsConstructor
-@NoArgsConstructor 
+@NoArgsConstructor
 @Data
 @Entity
 
@@ -52,18 +58,18 @@ public class Category implements Serializable {
 	@OneToMany(mappedBy = "category")
 
 	private List<Video> videos;
-	
+
 	public Video addVideo(Video video) {
 		getVideos().add(video);
 		video.setCategory(this);
 		return video;
 	}
-	
+
 	public Video updateVideo(Video video)
 	{
 		getVideos().add(video);
 		video.setCategory(this);
-		return video ; 
+		return video ;
 	}
 
 	public Video removeVideo(Video video) {
@@ -71,6 +77,6 @@ public class Category implements Serializable {
 		video.setCategory(null);
 		return video;
 	}
-	
-	
+
+
 }

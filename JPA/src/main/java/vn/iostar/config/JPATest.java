@@ -1,7 +1,6 @@
 package vn.iostar.config;
 
 import jakarta.persistence.EntityManager;
-
 import jakarta.persistence.EntityTransaction;
 
 public class JPATest {

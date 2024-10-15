@@ -67,14 +67,14 @@ public class CategoryDao implements ICategoryDao {
 
 		EntityTransaction trans = enma.getTransaction();
 		try {
-			
+
 			trans.begin();
 			Category category = enma.find(Category.class,cateid);
 			if (category != null)
 			{
 				enma.remove(category);
 			}
-			else 
+			else
 			{
 				throw new Exception("Khong tim thay id");
 			}
@@ -99,15 +99,15 @@ public class CategoryDao implements ICategoryDao {
 
 		EntityTransaction trans = enma.getTransaction();
 		try {
-			
+
 			trans.begin();
 			Category category = enma.find(Category.class,cateid);
 			if (category == null)
 			{
 				throw new Exception("Khong tim thay id");			}
-			else 
+			else
 			{
-				return category ; 
+				return category ;
 			}
 		} catch (Exception e) {
 
@@ -121,7 +121,7 @@ public class CategoryDao implements ICategoryDao {
 		}
 	}
 	@Override
-	public Category findByCategoryname (String name) throws Exception 
+	public Category findByCategoryname (String name) throws Exception
 	{
 		EntityManager enma = JPAConfig.getEntityManager();
 
@@ -131,26 +131,26 @@ public class CategoryDao implements ICategoryDao {
 				query.setParameter("catename", name);
 				Category category= query.getSingleResult();
 			 if(category==null) {
-			 
+
 				 throw new Exception("Category Name khong tim thay ");
 			 }
 			 return category;
-			 
-			 } 
+
+			 }
 		finally {
 			 enma.close();
-			 } 
+			 }
 		}
 	@Override
 	public List<Category> findAll()
 	{
 		EntityManager enma = JPAConfig.getEntityManager();
 
-		TypedQuery<Category> query= enma.createNamedQuery("Category.findAll", Category.class);	
-		
+		TypedQuery<Category> query= enma.createNamedQuery("Category.findAll", Category.class);
+
 		return query.getResultList();
 	}
-	
+
 	 @Override
 	public int count() {
 

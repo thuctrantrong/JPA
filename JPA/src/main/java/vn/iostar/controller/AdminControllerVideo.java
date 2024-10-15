@@ -13,15 +13,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
-import vn.iostar.entity.Video;
 import vn.iostar.entity.Category;
+import vn.iostar.entity.Video;
 import vn.iostar.service.IVideoService;
 import vn.iostar.service.impl.VideoServiceImpl;
 import vn.iostar.util.constants;
 
 @MultipartConfig()
 
-@WebServlet(urlPatterns = { "/admin/videos", "/admin/video/insert", "/admin/video/update" })
+@WebServlet(urlPatterns = { "/admin/videos", "/admin/video/insert", "/admin/video/add", "/admin/video/search" })
 public class AdminControllerVideo extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -30,13 +30,15 @@ public class AdminControllerVideo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String url = req.getRequestURI();
-        if (url.contains("/admin/videos")) {
+        if (url.contains("videos")) {
             List<Video> list = vdService.findAll();
             req.setAttribute("listvd", list);
-            req.getRequestDispatcher("/views/admin/video-list.jsp").forward(req, resp);
+            req.getRequestDispatcher("/resources/views/admin/video-list.jsp").forward(req, resp);
 
-        } else if (url.contains("/admin/video/insert")) {
-            req.getRequestDispatcher("/views/admin/video-insert.jsp").forward(req, resp);
+        } else if (url.contains("insert")) {
+            req.getRequestDispatcher("/resources/views/admin/video-insert.jsp").forward(req, resp);
+        }else if (url.contains("search")) {
+            req.getRequestDispatcher("/resources/views/admin/video-search.jsp").forward(req, resp);
         }
     }
 
@@ -44,20 +46,18 @@ public class AdminControllerVideo extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String url = req.getRequestURI();
 
-        if (url.contains("/admin/video/insert")) {
-            // Lấy thông tin từ request
+        if (url.contains("add")) {
             String vdname = req.getParameter("vdname");
-            String description = req.getParameter("description");
+            String description = req.getParameter("vddescription");
             boolean Active = Boolean.parseBoolean(req.getParameter("status"));
-            String images = req.getParameter("images");
+            String images = req.getParameter("poster");
 
-            // Kiểm tra và lấy categoryID
             int categoryID = 0;
             try {
                 categoryID = Integer.parseInt(req.getParameter("categoryID"));
             } catch (NumberFormatException e) {
                 req.setAttribute("errorMessage", "Invalid category ID!");
-                req.getRequestDispatcher("/views/admin/video-add.jsp").forward(req, resp);
+                req.getRequestDispatcher("/resources/views/admin/video-insert.jsp").forward(req, resp);
                 return;
             }
 
@@ -72,40 +72,51 @@ public class AdminControllerVideo extends HttpServlet {
             video.setCategory(category);
 
             String fname = "";
-            String uploadPath = constants.DIR; 
+            String uploadPath = constants.DIR;
             File uploadDir = new File(uploadPath);
             if (!uploadDir.exists()) {
                 uploadDir.mkdir();
             }
 
             try {
-                Part part = req.getPart("images1");
+                Part part = req.getPart("poster");
                 if (part != null && part.getSize() > 0) {
                     String filename = Paths.get(part.getSubmittedFileName()).getFileName().toString();
                     int index = filename.lastIndexOf(".");
                     String ext = filename.substring(index + 1);
                     fname = System.currentTimeMillis() + "." + ext;
                     part.write(uploadPath + "/" + fname);
-                    video.setPoster(fname); // Sử dụng tên file đã upload
+                    video.setPoster(fname);
                 } else if (images != null && !images.isEmpty()) {
-                    video.setPoster(images); // Nếu không có file upload, dùng hình đã có
+                    video.setPoster(images);
                 } else {
-                    video.setPoster("avatar.png"); // Mặc định dùng avatar.png nếu không có ảnh
+                    video.setPoster("avatar.png");
                 }
 
-                // Lưu video vào cơ sở dữ liệu
                 vdService.insert(video);
-                resp.sendRedirect("/admin/videos"); // Chuyển hướng sau khi thành công
-                	
+                resp.sendRedirect(req.getContextPath() + "/admin/videos");
+
             } catch (FileNotFoundException fne) {
                 fne.printStackTrace();
                 req.setAttribute("errorMessage", "File not found!");
-                req.getRequestDispatcher("/views/admin/video-add.jsp").forward(req, resp);
+                req.getRequestDispatcher("/resources/views/admin/video-insert.jsp").forward(req, resp);
             } catch (Exception e) {
                 e.printStackTrace();
                 req.setAttribute("errorMessage", "An error occurred while processing!");
-                req.getRequestDispatcher("/views/admin/video-add.jsp").forward(req, resp);
+                req.getRequestDispatcher("/resources/views/admin/video-insert.jsp").forward(req, resp);
             }
+        }
+        String title = req.getParameter("title");
+        if (url.contains("search"))
+        {
+        	Video vd = null ; 
+        	try {     		
+				 vd = vdService.findByVideoname(title);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+        	req.setAttribute("vd", vd); 
+            req.getRequestDispatcher("/resources/views/admin/video-search.jsp").forward(req, resp);
         }
     }
 }

@@ -2,8 +2,15 @@ package vn.iostar.entity;
 
 import java.io.Serializable;
 
-
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +18,7 @@ import lombok.NoArgsConstructor;
 
 
 @AllArgsConstructor
-@NoArgsConstructor 
+@NoArgsConstructor
 @Data
 @Entity
 
@@ -25,9 +32,11 @@ public class Video implements Serializable {
 
 	@Id
 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	@Column(name = "VideoId")
 
-	private String videoId;
+	private int videoId;
 
 	@Column(name = "Active")
 
@@ -54,10 +63,10 @@ public class Video implements Serializable {
 	@JoinColumn(name = "CategoryId")
 
 	private Category category;
-	
-	// constructer , getter, setter tu sinh ra voi cong nghe goi la lombok 
-	
-	
-	
-	
+
+	// constructer , getter, setter tu sinh ra voi cong nghe goi la lombok
+
+
+
+
 }

@@ -29,8 +29,8 @@ import vn.iostar.util.constants;
  "/admin/category/edit", "/admin/category/update", "/admin/category/delete" })
 
 public class AdminController extends HttpServlet  {
-	
-		
+
+
 	 private static final long serialVersionUID = 1L;
 
 	 public ICategoryService cateService = new CatergoryServiceImpl();
@@ -47,11 +47,11 @@ public class AdminController extends HttpServlet  {
 
 	 req.setAttribute("listcate", list);
 
-	 req.getRequestDispatcher("/views/admin/category-list.jsp").forward(req, resp);
+	 req.getRequestDispatcher("/resources/views/admin/category-list.jsp").forward(req, resp);
 
 	 } else if (url.contains("/admin/category/add")) {
 
-	 req.getRequestDispatcher("/views/admin/category-add.jsp").forward(req, resp);
+	 req.getRequestDispatcher("/resources/views/admin/category-add.jsp").forward(req, resp);
 
 	 } else if (url.contains("/admin/category/edit")) {
 
@@ -66,7 +66,7 @@ public class AdminController extends HttpServlet  {
 
 	 req.setAttribute("cate", category);
 
-	 req.getRequestDispatcher("/views/admin/category-edit.jsp").forward(req, resp);
+	 req.getRequestDispatcher("/resources/views/admin/category-edit.jsp").forward(req, resp);
 
 	 } else {
 
@@ -99,7 +99,6 @@ public class AdminController extends HttpServlet  {
 
 	 if (url.contains("/admin/category/insert")) {
 
-	 // lấy dữ liệu từ form
 
 	 String categoryname = req.getParameter("categoryname");
 
@@ -107,7 +106,6 @@ public class AdminController extends HttpServlet  {
 
 	 String images = req.getParameter("images");
 
-	 // đưa dữ liệu vào model
 
 	 Category category = new Category();
 
@@ -117,14 +115,13 @@ public class AdminController extends HttpServlet  {
 
 	 String fname = "";
 
-	 String uploadPath = constants.DIR; // upload vào thư mục bất kỳ
+	 String uploadPath = constants.DIR; 
 
 	 File uploadDir = new File(uploadPath);
 
-	 if (!uploadDir.exists())
-
-	 uploadDir.mkdir();
-
+	 if (!uploadDir.exists()) {
+		uploadDir.mkdir();
+	}
 	 try {
 
 	 Part part = req.getPart("images1");
@@ -150,7 +147,7 @@ public class AdminController extends HttpServlet  {
 	 } else {
 
 	 category.setImages("avatar.png");
-	 
+
 	 }
 
 	 } catch (FileNotFoundException fne) {
@@ -159,19 +156,15 @@ public class AdminController extends HttpServlet  {
 
 	 }
 
-	 // đưa model vào phương thức insert
-
 	 cateService.insert(category);
 
-	 // chuyển trang
 
 	 resp.sendRedirect(req.getContextPath() + "/admin/categories");
-	 
+
 	 }
 
 	 if (url.contains("/admin/category/update")) {
 
-	 // lấy dữ liệu từ form
 
 	 int categoryid = Integer.parseInt(req.getParameter("categoryid"));
 
@@ -181,7 +174,6 @@ public class AdminController extends HttpServlet  {
 
 	 String images = req.getParameter("images");
 
-	 // đưa dữ liệu vào model
 
 	 Category category = null;
 	try {
@@ -203,9 +195,9 @@ public class AdminController extends HttpServlet  {
 
 	 File uploadDir = new File(uploadPath);
 
-	 if (!uploadDir.exists())
-
-	 uploadDir.mkdir();
+	 if (!uploadDir.exists()) {
+		uploadDir.mkdir();
+	}
 
 	 try {
 
@@ -213,12 +205,11 @@ public class AdminController extends HttpServlet  {
 
 	 if (part.getSize() > 0) {
 
-	 // xóa file cũ trên thư mục
 
 	 if (!category.getImages().substring(0, 5).equals("https") ) {
 
 	 deleteFile(uploadPath+ "\\" + fileold);
-	 
+
 	 }
 
 	 String filename = Paths.get(part.getSubmittedFileName()).getFileName().toString();
@@ -226,7 +217,7 @@ public class AdminController extends HttpServlet  {
 	 int index = filename.lastIndexOf(".");
 
 	 String ext = filename.substring(index + 1);
-	 
+
 	 fname = System.currentTimeMillis() + "." + ext;
 
 	 part.write(uploadPath + "/" + fname);
@@ -268,10 +259,10 @@ public class AdminController extends HttpServlet  {
 
 	 Path path = Paths.get(filePath);
 
-	 Files.delete(path); 
-	 
+	 Files.delete(path);
+
 	 }
-	
-	
+
+
 }
 
